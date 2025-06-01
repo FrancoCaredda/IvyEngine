@@ -3,7 +3,16 @@ cmake_minimum_required(VERSION 3.8)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_STANDARD 17)
 
+set(BUILD_VS True CACHE BOOL True)
+
+if (BUILD_VS)
 set(SHARED_LIB_PATH "${CMAKE_BINARY_DIR}/Engine/Engine.dll")
+else()
+set(SHARED_LIB_PATH "${CMAKE_BINARY_DIR}/Engine/$<CONFIG>/Engine.dll")
+endif()
+
+message("SHARED_LIB_PATH=${SHARED_LIB_PATH}")
+
 
 project("Sandbox")
 add_compile_definitions(_CLIENT_APPLICATION_)
