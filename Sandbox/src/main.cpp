@@ -19,7 +19,7 @@ public:
     virtual void OnEventReceived(const Ivy::Event& event) override
     {
         if (event.GetType() & Ivy::KeyPressed)
-            std::cout << "The key " << *((const int*)event.GetEventData()) << " has been pressed!\n";
+            std::cout << "The key " << (int)*((const Ivy::KeyCodes*)event.GetEventData()) << " has been pressed!\n";
     }
 };
 

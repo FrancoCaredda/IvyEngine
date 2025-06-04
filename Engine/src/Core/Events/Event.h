@@ -50,6 +50,10 @@ namespace Ivy {
 		KeyPressed			 = 1 << 3,
 		KeyReleased			 = 1 << 4,
 		KeyHold				 = 1 << 5,
+
+		MousePressed		 = 1 << 6,
+		MouseReleased		 = 1 << 7,
+		MouseHold			 = 1 << 8
 	};
 
 	enum EventCategory
@@ -57,7 +61,8 @@ namespace Ivy {
 		EventCategoryNone		= 1 << 0,
 
 		InputEvent				= 1 << 1,
-		WindowEvent			    = 1 << 2
+		WindowEvent			    = 1 << 2,
+		MouseEvent				= 1 << 3
 	};
 
 #define EVENT_BODY(Type, Category) virtual EventType GetType() const override { return EventType::##Type; }\

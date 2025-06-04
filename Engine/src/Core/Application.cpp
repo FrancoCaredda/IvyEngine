@@ -60,13 +60,13 @@ namespace Ivy {
 		switch (action)
 		{
 		case GLFW_PRESS:
-			InputReceived.Execute(KeyPressedEvent{ key });
+			InputReceived.Execute(KeyPressedEvent{ static_cast<KeyCodes>(key) });
 			break;
 		case GLFW_REPEAT:
-			InputReceived.Execute(KeyHoldEvent{ key });
+			InputReceived.Execute(KeyHoldEvent{ static_cast<KeyCodes>(key) });
 			break;
 		case GLFW_RELEASE:
-			InputReceived.Execute(KeyReleasedEvent{ key });
+			InputReceived.Execute(KeyReleasedEvent{ static_cast<KeyCodes>(key) });
 			break;
 		default:
 			break;
