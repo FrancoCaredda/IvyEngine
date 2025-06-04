@@ -7,7 +7,9 @@ project("Engine")
 add_compile_definitions(_ENGINE_DYNAMIC_LIB_)
 add_library(${PROJECT_NAME} SHARED "src/Core/Application.h"
                                    "src/Core/Application.cpp"
-                                   "pch.h" "src/Core/Event.h")
+                                   "pch.h" 
+                                   "src/Core/Events/Event.h"
+                                   "src/Core/Events/Event.cpp" "src/Core/Events/InputEvents.h")
 target_precompile_headers(${PROJECT_NAME} PUBLIC "pch.h")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_SRC_DIR}/glm"
                                                   "${CMAKE_SRC_DIR}/glfw/include"

@@ -3,29 +3,37 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
-struct WindowSpecification
-{
-	std::string_view Title;
-	int Width;
-	int Height;
-};
+#include "Events/InputEvents.h"
 
-class API Application
-{
-public:
-	explicit Application(const WindowSpecification& windowSpec)
-		: m_WindowSpec(windowSpec) {}
+namespace Ivy {
+	struct WindowSpecification
+	{
+		std::string_view Title;
+		int Width;
+		int Height;
+	};
 
-	void Run();
+	class API Application
+	{
+	public:
+		explicit Application(const WindowSpecification& windowSpec)
+			: m_WindowSpec(windowSpec) {}
 
-	~Application();
-protected:
-	virtual void Start() {}
-	virtual void Update(float deltaTime) {}
-private:
-	void InitWindow();
-	void InitGlad();
-private:
-	GLFWwindow* m_Window = nullptr;
-	WindowSpecification m_WindowSpec;
-};
+		void Run();
+
+		~Application();
+	protected:
+		static EventProvider InputReceived;
+	protected:
+		virtual void Start() {}
+		virtual void Update(float deltaTime) {}
+	private:
+		void InitWindow();
+		void InitGlad();
+
+		static void KeyCallbackInternal(GLFWwindow* window, int key, int scancode, int action, int mods);
+	private:
+		GLFWwindow* m_Window = nullptr;
+		WindowSpecification m_WindowSpec;
+	};
+}
