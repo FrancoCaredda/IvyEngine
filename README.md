@@ -3,11 +3,36 @@
 IvyEngine is a 2D game engine written in C++ using OpenGL.  
 ## Functionality
 * Event System:
+    - [X] Multicast Delegates
+    - [X] Events (EventProvider, EventSubscriber, Event)
+    - [ ] Window Events
+    - [X] Input Events
+    - [ ] Key Code Enum
+    - [ ] Key Action Enum
+    - [ ] Offloaded Events
 * Memory management:
+    - [ ] Arena Allocators
 * Rendering:
+    - [ ] Renderer class
+    - [ ] Textures
+    - [ ] Sprites
+    - [ ] SpriteComponent
+    - [ ] Framebuffers
+    - [ ] Batching
+    - [ ] Compute shaders
 * Serialization:
+    - [ ] JSON serialization
+    - [ ] Binary serialization
 * Animations:
+    - [ ] Sprite sequencer
+    - [ ] SpriteSquencesComponent
+    - [ ] Sequencer Notify Events
+    - [ ] State Machines
 * Physics:
+    - [ ] Collision Detection
+    - [ ] Forces
+    - [ ] Raycasting
+    - [ ] Impulse Solving
 * UI:
 * Audio:
 * Gameplay Framework:
