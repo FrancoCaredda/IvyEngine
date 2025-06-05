@@ -2,9 +2,15 @@
 
 #include "Event.h"
 
+#include "GLFW/glfw3.h"
+
 namespace Ivy {
 
 #define KEY_CODE(EnumValue, KeyCode) EnumValue = GLFW_KEY_##KeyCode
+#define MOUSE_CODE(EnumValue, MouseCode) EnumValue = GLFW_MOUSE_##MouseCode
+#define JOYSTICK_CODE(EnumValue, JoystickCode) EnumValue = GLFW_JOYSTICK_##JoystickCode
+#define GAMEPAD_BUTTON_CODE(EnumValue, GamepadCode) EnumValue = GLFW_GAMEPAD_BUTTON_##GamepadCode
+#define GAMEPAD_AXIS_CODE(EnumValue, GamepadAxisCode) EnumValue = GLFW_GAMEPAD_AXIS_##GamepadAxisCode
 
 	enum class KeyCodes : uint32_t
 	{
@@ -131,7 +137,77 @@ namespace Ivy {
 	};
 
 	enum class MouseCodes : uint8_t
-	{};
+	{
+		MOUSE_CODE(Button1, BUTTON_1),
+		MOUSE_CODE(Button2, BUTTON_2),
+		MOUSE_CODE(Button3, BUTTON_3),
+		MOUSE_CODE(Button4, BUTTON_4),
+		MOUSE_CODE(Button5, BUTTON_5),
+		MOUSE_CODE(Button6, BUTTON_6),
+		MOUSE_CODE(Button7, BUTTON_7),
+		MOUSE_CODE(Button8, BUTTON_8),
+		MOUSE_CODE(ButtonLast, BUTTON_LAST),
+		MOUSE_CODE(ButtonLeft, BUTTON_LEFT),
+		MOUSE_CODE(ButtonRight, BUTTON_RIGHT),
+		MOUSE_CODE(ButtonMuddle, BUTTON_MIDDLE)
+	};
+
+	enum class JoystickCodes : uint8_t
+	{
+		JOYSTICK_CODE(Joystick1, 1),
+		JOYSTICK_CODE(Joystick2, 2),
+		JOYSTICK_CODE(Joystick3, 3),
+		JOYSTICK_CODE(Joystick4, 4),
+		JOYSTICK_CODE(Joystick5, 5),
+		JOYSTICK_CODE(Joystick6, 6),
+		JOYSTICK_CODE(Joystick7, 7),
+		JOYSTICK_CODE(Joystick8, 8),
+		JOYSTICK_CODE(Joystick9, 9),
+		JOYSTICK_CODE(Joystick10, 10),
+		JOYSTICK_CODE(Joystick11, 11),
+		JOYSTICK_CODE(Joystick12, 12),
+		JOYSTICK_CODE(Joystick13, 13),
+		JOYSTICK_CODE(Joystick14, 14),
+		JOYSTICK_CODE(Joystick15, 15),
+		JOYSTICK_CODE(Joystick16, 16),
+		JOYSTICK_CODE(JoystickLast, LAST)
+	};
+
+	enum class GamepadButtonCodes : uint8_t
+	{
+		GAMEPAD_BUTTON_CODE(GamepadA, A),
+		GAMEPAD_BUTTON_CODE(GamepadB, B),
+		GAMEPAD_BUTTON_CODE(GamepadX, X),
+		GAMEPAD_BUTTON_CODE(GamepadY, Y),
+		GAMEPAD_BUTTON_CODE(GamepadLeftBumper, LEFT_BUMPER),
+		GAMEPAD_BUTTON_CODE(GamepadRightBumper, RIGHT_BUMPER),
+		GAMEPAD_BUTTON_CODE(GamepadBack, BACK),
+		GAMEPAD_BUTTON_CODE(GamepadStart, START),
+		GAMEPAD_BUTTON_CODE(GamepadGuide, GUIDE),
+		GAMEPAD_BUTTON_CODE(GamepadLeftThumb, LEFT_THUMB),
+		GAMEPAD_BUTTON_CODE(GamepadRightThumb, RIGHT_THUMB),
+		GAMEPAD_BUTTON_CODE(GamepadDpadUp, DPAD_UP),
+		GAMEPAD_BUTTON_CODE(GamepadDpadRight, DPAD_RIGHT),
+		GAMEPAD_BUTTON_CODE(GamepadDpadDown, DPAD_DOWN),
+		GAMEPAD_BUTTON_CODE(GamepadDpadLeft, DPAD_LEFT),
+		GAMEPAD_BUTTON_CODE(GamepadLast, LAST),
+
+		GAMEPAD_BUTTON_CODE(GamepadCross, CROSS),
+		GAMEPAD_BUTTON_CODE(GamepadCircle, CIRCLE),
+		GAMEPAD_BUTTON_CODE(GamepadSquare, SQUARE),
+		GAMEPAD_BUTTON_CODE(GamepadTriangle, TRIANGLE),
+	};
+
+	enum class GamepadAxisCodes : uint8_t
+	{
+		GAMEPAD_AXIS_CODE(GamepadAxisLeftX, LEFT_X),
+		GAMEPAD_AXIS_CODE(GamepadAxisLeftY, LEFT_Y),
+		GAMEPAD_AXIS_CODE(GamepadAxisRightX, RIGHT_X),
+		GAMEPAD_AXIS_CODE(GamepadAxisRightY, RIGHT_Y),
+		GAMEPAD_AXIS_CODE(GamepadAxisLeftTrigger, LEFT_TRIGGER),
+		GAMEPAD_AXIS_CODE(GamepadAxisRightTrigger, RIGHT_TRIGGER),
+		GAMEPAD_AXIS_CODE(GamepadAxisLast, LAST)
+	};
 
 	class KeyPressedEvent : public Event 
 	{
@@ -188,11 +264,43 @@ namespace Ivy {
 			: Event(), m_MouseCode(mouseCode) {}
 
 		/**
-		* \return const void* - pointer to the event data (can be casted to const KeyCodes*)
+		* \return const void* - pointer to the event data (can be casted to const MouseCodes*)
 		*/
 		virtual const void* GetEventData() const { return reinterpret_cast<const void*>(&m_MouseCode); }
 
 		EVENT_BODY(MousePressed, MouseEvent);
+	private:
+		MouseCodes m_MouseCode;
+	};
+
+	class MouseEventReleased : public Event
+	{
+	public:
+		MouseEventReleased(MouseCodes mouseCode)
+			: Event(), m_MouseCode(mouseCode) {}
+
+		/**
+		* \return const void* - pointer to the event data (can be casted to const MouseCodes*)
+		*/
+		virtual const void* GetEventData() const { return reinterpret_cast<const void*>(&m_MouseCode); }
+
+		EVENT_BODY(MouseReleased, MouseEvent);
+	private:
+		MouseCodes m_MouseCode;
+	};
+
+	class MouseEventHold : public Event
+	{
+	public:
+		MouseEventHold(MouseCodes mouseCode)
+			: Event(), m_MouseCode(mouseCode) {}
+
+		/**
+		* \return const void* - pointer to the event data (can be casted to const MouseCodes*)
+		*/
+		virtual const void* GetEventData() const { return reinterpret_cast<const void*>(&m_MouseCode); }
+
+		EVENT_BODY(MouseHold, MouseEvent);
 	private:
 		MouseCodes m_MouseCode;
 	};

@@ -40,7 +40,7 @@ namespace Ivy {
 		std::vector<std::function<void(TArgs...)>> m_Callbacks;
 	};
 
-	enum EventType
+	enum class EventType : uint8_t
 	{
 		EventTypeNone		 = 1 << 0,
 
@@ -56,7 +56,7 @@ namespace Ivy {
 		MouseHold			 = 1 << 8
 	};
 
-	enum EventCategory
+	enum class EventCategory : uint8_t
 	{
 		EventCategoryNone		= 1 << 0,
 
@@ -64,6 +64,10 @@ namespace Ivy {
 		WindowEvent			    = 1 << 2,
 		MouseEvent				= 1 << 3
 	};
+
+	DEFINE_BITWISE_BINARY_OPERATOR(&, EventType)
+	DEFINE_BITWISE_BINARY_OPERATOR(|, EventType)
+	DEFINE_BITWISE_BINARY_OPERATOR(^, EventType)
 
 #define EVENT_BODY(Type, Category) virtual EventType GetType() const override { return EventType::##Type; }\
 								   virtual EventCategory GetCategory() const override { return EventCategory::##Category; }
