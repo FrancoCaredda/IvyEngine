@@ -32,6 +32,8 @@ namespace Ivy {
 		void InitGlad();
 
 		static void KeyCallbackInternal(GLFWwindow* window, int key, int scancode, int action, int mods);
+		static void MousePositionCallbackInternal(GLFWwindow* window, double xpos, double ypos);
+		static void MouseButtonCallabackInternal(GLFWwindow* window, int button, int action, int mods);
 	private:
 		GLFWwindow* m_Window = nullptr;
 		WindowSpecification m_WindowSpec;

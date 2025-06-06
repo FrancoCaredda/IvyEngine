@@ -257,10 +257,10 @@ namespace Ivy {
 		KeyCodes m_KeyCode;
 	};
 
-	class MouseEventPressed : public Event
+	class MousePressedEvent : public Event
 	{
 	public:
-		MouseEventPressed(MouseCodes mouseCode)
+		MousePressedEvent(MouseCodes mouseCode)
 			: Event(), m_MouseCode(mouseCode) {}
 
 		/**
@@ -268,15 +268,15 @@ namespace Ivy {
 		*/
 		virtual const void* GetEventData() const { return reinterpret_cast<const void*>(&m_MouseCode); }
 
-		EVENT_BODY(MousePressed, MouseEvent);
+		EVENT_BODY(MousePressed, MouseEvent)
 	private:
 		MouseCodes m_MouseCode;
 	};
 
-	class MouseEventReleased : public Event
+	class MouseReleasedEvent : public Event
 	{
 	public:
-		MouseEventReleased(MouseCodes mouseCode)
+		MouseReleasedEvent(MouseCodes mouseCode)
 			: Event(), m_MouseCode(mouseCode) {}
 
 		/**
@@ -284,15 +284,15 @@ namespace Ivy {
 		*/
 		virtual const void* GetEventData() const { return reinterpret_cast<const void*>(&m_MouseCode); }
 
-		EVENT_BODY(MouseReleased, MouseEvent);
+		EVENT_BODY(MouseReleased, MouseEvent)
 	private:
 		MouseCodes m_MouseCode;
 	};
 
-	class MouseEventHold : public Event
+	class MouseHoldEvent : public Event
 	{
 	public:
-		MouseEventHold(MouseCodes mouseCode)
+		MouseHoldEvent(MouseCodes mouseCode)
 			: Event(), m_MouseCode(mouseCode) {}
 
 		/**
@@ -300,8 +300,30 @@ namespace Ivy {
 		*/
 		virtual const void* GetEventData() const { return reinterpret_cast<const void*>(&m_MouseCode); }
 
-		EVENT_BODY(MouseHold, MouseEvent);
+		EVENT_BODY(MouseHold, MouseEvent)
 	private:
 		MouseCodes m_MouseCode;
+	};
+
+	class MousePositionChangedEvent : public Event
+	{
+	public:
+		struct MousePosition
+		{
+			double X;
+			double Y;
+		};
+
+		MousePositionChangedEvent(const MousePosition& mousePosition)
+			: Event(), m_MousePosition(mousePosition) {}
+
+		/**
+		* \return const void* - pointer to the event data (can be casted to const MousePositionChangedEvent::MousePosition*)
+		*/
+		virtual const void* GetEventData() const { return reinterpret_cast<const void*>(&m_MousePosition); }
+	
+		EVENT_BODY(MousePositionChanged, MouseEvent)
+	private:
+		MousePosition m_MousePosition;
 	};
 }

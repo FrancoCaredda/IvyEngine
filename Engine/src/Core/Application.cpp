@@ -47,6 +47,8 @@ namespace Ivy {
 
 		glfwMakeContextCurrent(m_Window);
 		glfwSetKeyCallback(m_Window, KeyCallbackInternal);
+		glfwSetCursorPosCallback(m_Window, MousePositionCallbackInternal);
+		glfwSetMouseButtonCallback(m_Window, MouseButtonCallabackInternal);
 	}
 
 	void Application::InitGlad()
@@ -69,6 +71,25 @@ namespace Ivy {
 			InputReceived.Execute(KeyReleasedEvent{ static_cast<KeyCodes>(key) });
 			break;
 		default:
+			break;
+		}
+	}
+
+	void Application::MousePositionCallbackInternal(GLFWwindow* window, double xpos, double ypos)
+	{
+		InputReceived.Execute(MousePositionChangedEvent{ {xpos, ypos} });
+	}
+
+	void Application::MouseButtonCallabackInternal(GLFWwindow* window, int button, int action, int mods)
+	{
+		switch (action)
+		{
+		case GLFW_PRESS:
+			InputReceived.Execute(MousePressedEvent{ static_cast<MouseCodes>(button) });
+			break;
+		case GLFW_RELEASE:
+		default:
+			InputReceived.Execute(MouseReleasedEvent{ static_cast<MouseCodes>(button) });
 			break;
 		}
 	}

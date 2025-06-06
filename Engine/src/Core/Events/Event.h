@@ -40,7 +40,7 @@ namespace Ivy {
 		std::vector<std::function<void(TArgs...)>> m_Callbacks;
 	};
 
-	enum class EventType : uint8_t
+	enum class EventType : uint64_t
 	{
 		EventTypeNone		 = 1 << 0,
 
@@ -53,10 +53,12 @@ namespace Ivy {
 
 		MousePressed		 = 1 << 6,
 		MouseReleased		 = 1 << 7,
-		MouseHold			 = 1 << 8
+		MouseHold			 = 1 << 8,
+
+		MousePositionChanged = 1 << 9
 	};
 
-	enum class EventCategory : uint8_t
+	enum class EventCategory : uint64_t
 	{
 		EventCategoryNone		= 1 << 0,
 
